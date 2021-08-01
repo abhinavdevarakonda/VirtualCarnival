@@ -1,0 +1,73 @@
+{% load static %}
+
+<div class="d-flex p-3 mb-4 bg-white border-bottom shadow-sm">
+
+    <div class="d-md-flex align-items-center">
+        
+        <!--column 1-->
+        <h5 class="font-weight-normal flex-row">
+            <a class="p-2 text-dark" href="{% url 'home' %}">Home</a>       <!--this will look for the url 'home' in all the urls in urls.py-->
+        </h5>     
+        
+        <!--column 2-->
+        <form class="search-bar flex-row">
+            <input type="text" class="form-control" name="q" id="id_q_large" placeholder="Search...">
+        </form>
+        
+        <!--column 3-->
+        <div class="d-flex flex-row-reverse flex-grow-1 ">
+            <nav>
+                {% if request.user.is_authenticated %}          <!-- if they're authenticated they should see their profile and logout-->
+                </div>
+                    <div class="dropdown dropleft show p-2">
+                        <div class="d-flex flex-row p-2 align-items-center">
+                            <!--notifs-->
+                            <div class="btn-group dropleft">
+                                <div class="d-flex notifications-icon-container rounded-circle align-items-center mr-3" id="id_chat_notification_dropdown_toggle" 
+                                data-toggle="dropdown">
+                                    <span id="id_chat_notifications_count" class="notify-badge"></span>
+                                    <span class="d-flex material-icons notifications_material-icon m-auto align-items-center">notifications</span>
+                                    <div class="dropdown-menu scrollable-menu" aria-labelledby="id_chat_notification_dropdown_toggle" id="
+                                    id_chat_notifications_container">
+                                
+                                    </div>
+                                </div>
+                            </div>
+                                
+                            <!--activites-->
+                            <div class="btn-group dropleft">
+                                <div class="d-flex notifications-icon-container rounded-circle align-items-center" id="id_activity_dropdown_toggle" 
+                                data-toggle="dropdown">
+                                    <span id="id_activity_count" class="notify-badge"></span>
+                                    <span class="d-flex material-icons directions_run_material-icon m-auto align-items-center">directions_run</span>
+                                    <div class="dropdown-menu scrollable-menu" aria-labelledby="id_activity_dropdown_toggle" id="
+                                    id_chat_notifications_container">
+                                
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--account settings-->
+                            <div class="brn-group dropleft">
+                                <img class="account-image rounded-circle m-auto d-block dropdown-toggle" id="
+                                id_profile_links" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="
+                                {{request.user.profile_image.url}}" alt="VirtualCarnical default pfp" width="40" height="40">
+                                <div class="dropdown-menu" role="menu" aria-labelledby="id_profile_links">
+                                    <a class="dropdown-item" href="#">Account</a>
+                                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                                </div>
+                            </div> 
+
+                        </div>
+                        
+                    </div>                                            <!-- if not they should see register,login etc.-->
+                {% else %}
+                    <a class="p-2 text-dark" href="{% url 'login' %}">Login</a>
+                    <a class="btn btn-outline-primary" href="{% url 'register' %}">Register</a>
+                {% endif %}
+
+            </nav>
+        </div>
+        
+    </div>
+</div>

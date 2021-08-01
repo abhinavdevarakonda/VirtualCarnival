@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<style type="text/css">
+
+    .card-signin{
+        width:      100%;
+        max-width:  400px;
+        padding:    10px;
+        margin:     auto;
+    }
+
+    .form-signin input[type="email"]{
+        margin-bottom:                  10px;
+        border-bottom-right-radius:     0px;
+        border-bottom-left-radius:      0px;
+    }
+
+    .form-signin input[type="text"]{
+        margin-bottom:                  10px;
+        border-bottom-right-radius:     0px;
+        border-bottom-left-radius:      0px;
+    }
+
+    .form-signin input[type="password"]{
+        margin-bottom:                  0px;
+        border-bottom-right-radius:     0px;
+        border-bottom-left-radius:      0px;
+    }
+
+
+</style>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="card card-signin">
+            <div class="card-header font-weight-bold">
+                Create Your Virtual Carnival Account
+            </div>
+            <div class="card-body">
+                <form class="form-signin" method="post">{% csrf_token %}
+                    <!--A CSRF Token is a secret, unique and unpredictable value a server-side 
+                    application generates in order to protect CSRF vulnerable resources -->
+                        <div class="d-flex flex-column pb-3">
+                            <img class="img-fluid mx-auto d-block" src="
+                            {% static 'VirtualCarnival/carnival.png' %}" alt="
+                            VirtualCarnival carnival" width="64" height="64">
+                        </div>
+                        <input type="email" name="email" id="inputemail" class="form-control" placeholder="
+                        Email address" required autofocus>
+                        <br>
+                        <input type="text" name="username" id="inputusername" class="form-control" placeholder="
+                        Username" required>
+                        <br>
+                        <input type="password" name="password1" id="inputpassword1" class="form-control" placeholder="
+                        Password" required>
+                        <br>
+                        <input type="password" name="password2" id="inputpassword2" class="form-control" placeholder="
+                        Confirm Password" required>
+                        <br>
+                        <!--will automatically find errors so just display errors in red-->
+                        {% for field in registration_form %}
+                        <p>
+                        {% for error in field.errors %}
+                        <p style="color: red">{{error}}</p>
+                        {% endfor %}
+                        </p>
+                        {% endfor %}
+                        {% if registration_form.non_field_errors %}
+                        <div style="color: red">
+                            <p>{{registration_form.non_field_errors</p>
+                        </div>
+                        {% endif %}
+                        
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                        
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock content %}
